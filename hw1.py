@@ -32,7 +32,7 @@ def histogram_times(filename):
 
 def weigh_pokemons(filename, weight):
     dataset = None
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding = 'utf-8') as f:
         dataset = json.load(f)
     pokemons = dataset['pokemon']
 
@@ -46,7 +46,7 @@ def weigh_pokemons(filename, weight):
 
 def single_type_candy_count(filename):
     dataset = None
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding = 'utf-8') as f:
         dataset = json.load(f)
     pokemons = dataset['pokemon']
 
@@ -103,8 +103,8 @@ def main():
     print("points {} ==> {}".format(points, reflections_and_projections(points)))
 
     # 3.2 normalization
-    image = np.zeros([32, 32])
-    image[0:2, :] = 125
+    image = np.random.randint(0, 256, (32, 32))
+    print(image)
     print(normalize(image))
 
     # 3.3 normalization Part II
