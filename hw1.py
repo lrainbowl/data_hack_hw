@@ -26,7 +26,7 @@ def histogram_times(filename):
                 continue
             valid_hour.append(int(hour))
     
-    hist, bins = np.histogram(valid_hour, bins=list(range(24)))
+    hist, bins = np.histogram(valid_hour, bins=list(range(25)))
     return hist
 
 
@@ -82,3 +82,33 @@ def normalize(image):
 
 def sigmoid_normalize(image, a):
     return 255/(1 + np.exp(-(image-128)/a))
+
+
+def main():
+    # 1. Parsing CSV Data
+    file1 = 'airplane_crashes.csv'
+    print('Number of crashes occurred at each hour of the day: {}'.format(histogram_times(file1)))
+
+    # 2.1 Gotta Wight's Em All
+    file2 = 'pokedex.json'
+    weights = [10.0, 32.0]
+    for weight in weights:
+        print('Pokemons with weight {}: {}'.format(weight, weigh_pokemons(file2, weight)))
+
+    # 2.2 Single-type Pokemon
+    print("Total count of single-type pokomon's candies: {}".format(single_type_candy_count(file2)))
+
+    # 3.1 Reflections and projections
+    points = np.array([[0, 1], [0, 0]])
+    print("points {} ==> {}".format(points, reflections_and_projections(points)))
+
+    # 3.2 normalization
+    image = np.zeros([32, 32])
+    image[0:2, :] = 125
+    print(normalize(image))
+
+    # 3.3 normalization Part II
+    print(sigmoid_normalize(image, 1))
+
+if __name__ == '__main__':
+    main()
